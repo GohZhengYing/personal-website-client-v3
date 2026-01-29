@@ -10,6 +10,7 @@ import { Project } from "./_types/project";
 import { useState, useEffect } from "react";
 import SkillCard from "./_common/SkillCard";
 import { useProjects } from "./_hooks/useProjects";
+import { padding } from "@mui/system";
 
 export default function Home() {
   // Common button styles
@@ -19,47 +20,54 @@ export default function Home() {
     textTransform: 'none',
   };
 
-    const [project, setProject] = useState<Project>({
-      homePageHeader: '',
-      homePageBody: '',
-      homePageImage: '',
-      homePageSkills: [],
-      projects: [],
-      aboutMe: '',
-      contacts: {
-            email: '',
+  const [project, setProject] = useState<Project>({
+    homePageHeader: '',
+    homePageBody: '',
+    homePageImage: '',
+    homePageSkills: [],
+    projects: [],
+    aboutMe: '',
+    contacts: {
+      email: '',
       linkedinUrl: '',
       githubUrl: ''
-      },
-    });
+    },
+  });
 
-    useEffect(() => {
-  
-      // Load data only if token exists
-      useProjects()
-        .then((res) => {
-          if (res.status === 401) {
-            throw new Error('Unauthorized');
-          }
-          return res.json();
-        })
-        .then((data) => setProject(data))
-        .catch(() => {});
-    }, []);
+  useEffect(() => {
+
+    // Load data only if token exists
+    useProjects()
+      .then((res) => {
+        if (res.status === 401) {
+          throw new Error('Unauthorized');
+        }
+        return res.json();
+      })
+      .then((data) => setProject(data))
+      .catch(() => { });
+  }, []);
 
   return (
     <NavigationLayout>
-  
+
       <Container maxWidth="lg">
         {/* HERO SECTION */}
         <Box sx={{ py: 10, textAlign: 'center' }}>
-          <Typography variant="h3" fontWeight={700} gutterBottom >
+          <Typography
+            fontWeight={700}
+            gutterBottom
+            sx={{
+              fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' }, // adjust sizes as needed
+            }}
+          >
             {project.homePageHeader}
           </Typography>
+
           {project.homePageImage && <img src={project.homePageImage} width={200} />}
-          <Typography 
-            variant="h6" 
-            color="text.secondary" 
+          <Typography
+            variant="h6"
+            color="text.secondary"
             sx={{ mb: 4, maxWidth: '720px', mx: 'auto' }}
           >
             {project.homePageBody}
@@ -100,16 +108,16 @@ export default function Home() {
             My Skills
           </Typography>
 
-          <Grid container spacing={3} sx={{ mt: 1 }}>
+          <Grid container sx={{ mt: 1 }}>
             {project.homePageSkills.map((skill) => (
-              <Grid key={skill.skill}>
-                <SkillCard name={skill.skill} image={skill.image}/>
+              <Grid key={skill.skill} sx={{ m: 0.3 }}>
+                <SkillCard name={skill.skill} image={skill.image} />
               </Grid>
             ))}
           </Grid>
         </Box>
       </Container>
-      
+
     </NavigationLayout>
   );
 }

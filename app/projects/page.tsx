@@ -35,7 +35,7 @@ export default function Projects() {
     useProjects()
       .then((res) => res.json())
       .then((data) => setProjectData(data))
-      .catch(() => {});
+      .catch(() => { });
   }, []);
 
   return (
@@ -47,10 +47,13 @@ export default function Projects() {
 
         <Grid container spacing={4}>
           {projectData.projects.map((project) => (
-            <Grid key={project.title}>
+            <Grid key={project.title} sx={{
+              width: '100%',
+            }}>
               <Card
                 sx={{
                   height: '100%',
+                  width: '100%',
                   transition: '0.2s ease',
                   '&:hover': {
                     boxShadow: 4,
@@ -59,7 +62,7 @@ export default function Projects() {
                 }}
               >
                 <CardActionArea
-                  href={project.link}
+                  href={project.link ? project.link : '/'}
                   target="_blank"
                   sx={{ height: '100%' }}
                 >
@@ -73,9 +76,13 @@ export default function Projects() {
                         sx={{
                           width: '100%',
                           height: 160,
-                          objectFit: 'cover',
+                          objectFit: 'scale-down',
                           borderRadius: 1,
                           mb: 2,
+                          borderWidth: '1px',
+                          borderStyle: 'solid',
+                          borderColor: '#ADD8E6',
+                          p: '5px'
                         }}
                       />
                     )}
@@ -88,19 +95,24 @@ export default function Projects() {
                     {/* Description */}
                     <Typography
                       color="text.secondary"
-                      sx={{ mt: 1, mb: 2 }}
+                      sx={{
+                        mt: 1,
+                        mb: 2,
+                        whiteSpace: 'pre-line',
+                      }}
                     >
                       {project.body}
                     </Typography>
 
+
                     {/* Skills */}
-                    <Stack direction="row" spacing={1} flexWrap="wrap">
+                    <Stack direction="row" flexWrap="wrap">
                       {project.skills.map((skill) => (
                         <Chip
                           key={skill}
                           label={skill}
                           size="small"
-                          sx={{ mb: 1 }}
+                          sx={{ m: 0.5 }}
                         />
                       ))}
                     </Stack>

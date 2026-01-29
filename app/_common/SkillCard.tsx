@@ -23,12 +23,12 @@ const SkillCard = ({ name, image }: SkillCardProps) => {
         },
       }}
     >
-      <CardContent
+      <Box
         sx={{
           display: 'flex',
           alignItems: 'center',
           gap: 1.5,
-          p: { xs: 1.5, sm: 2 },
+          p: { xs: 0.5, sm: 1 }
         }}
       >
         {image && (
@@ -37,8 +37,8 @@ const SkillCard = ({ name, image }: SkillCardProps) => {
             src={image}
             alt={name}
             sx={{
-              width: { xs: 32, sm: 40 },
-              height: { xs: 32, sm: 40 },
+              width: { xs: 22, sm: 30 },
+              height: { xs: 22, sm: 30 },
               objectFit: 'contain',
               flexShrink: 0,
             }}
@@ -52,7 +52,7 @@ const SkillCard = ({ name, image }: SkillCardProps) => {
         >
           {name}
         </Typography>
-      </CardContent>
+      </Box>
     </Card>
   );
 };
