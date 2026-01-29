@@ -14,6 +14,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
 import NavButton from "../_common/NavigationButton";
+import { useRouter } from 'next/navigation';
 
 type NavigationLayoutProps = {
   children: React.ReactNode;
@@ -21,6 +22,7 @@ type NavigationLayoutProps = {
 
 export default function NavigationLayout({ children }: NavigationLayoutProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const router = useRouter();
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh", width: "100%" }}>
@@ -72,10 +74,10 @@ export default function NavigationLayout({ children }: NavigationLayoutProps) {
                 anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
                 transformOrigin={{ vertical: "top", horizontal: "right" }}
               >
-                <MenuItem onClick={() => setAnchorEl(null)}>Home</MenuItem>
-                <MenuItem onClick={() => setAnchorEl(null)}>Projects</MenuItem>
-                <MenuItem onClick={() => setAnchorEl(null)}>About</MenuItem>
-                <MenuItem onClick={() => setAnchorEl(null)}>Contacts</MenuItem>
+                <MenuItem onClick={() => router.push('/')}>Home</MenuItem>
+                <MenuItem onClick={() => router.push('projects')}>Projects</MenuItem>
+                <MenuItem onClick={() => router.push('about')}>About</MenuItem>
+                <MenuItem onClick={() => router.push('contacts')}>Contacts</MenuItem>
               </Menu>
             </Toolbar>
           </Container>

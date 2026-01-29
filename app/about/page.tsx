@@ -51,10 +51,16 @@ export default function About() {
           <Typography variant="h4" fontWeight={600} gutterBottom>
             About Me
           </Typography>
-
-          <Typography color="text.secondary" maxWidth="700px">
-            {project.aboutMe}
-          </Typography>
+                    <Typography
+                      color="text.secondary"
+                      sx={{
+                        mt: 1,
+                        mb: 2,
+                        whiteSpace: 'pre-line',
+                      }}
+                    >
+                      {project.aboutMe}
+                    </Typography>
         </Box>
       </Container>
     </NavigationLayout>
